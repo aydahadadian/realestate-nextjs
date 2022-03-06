@@ -6,23 +6,21 @@ import { FaBed, FaBath } from 'react-icons/fa';
 import { BsGridFill } from 'react-icons/bs';
 import { GoVerified } from 'react-icons/go';
 import millify from 'millify';
-import LazyLoad from 'react-lazyload';
 
-import DefaultImage from '../assets/sean-pollock-PhYq704ffdA-unsplash.jpg';
-// import Image from 'next/image';
-import { Image } from '@chakra-ui/react'
 
-const property = ({property:{coverPhoto, price, rentFrequency, rooms, title, baths, area, agency, isVerified, externalID }}) => {
+import DefaultImage from '../assets/Images/sean-pollock-PhYq704ffdA-unsplash.jpg';
+import Image from 'next/image';
+
+
+const Property = ({property:{coverPhoto, price, rentFrequency, rooms, title, baths, area, agency, isVerified, externalID }}) => {
 
   return (
     <Link href={`/property/${externalID}`} passHref>
        <Flex flexWrap='wrap' w='420px' p='5' paddingTop='0px' justifyContent='flex-start' cursor='pointer' >
-      <Box>
-      <LazyLoad height={260} once >
+      <Box borderRadius="4px" overflow="hidden">
+    
       <Image src={coverPhoto ? coverPhoto.url : DefaultImage} width={400} height={260} />
-        </LazyLoad>
-      
-        
+       
       </Box>
       <Box w='full'>
         <Flex paddingTop='2' alignItems='center' justifyContent='space-between'>
@@ -47,4 +45,4 @@ const property = ({property:{coverPhoto, price, rentFrequency, rooms, title, bat
   )
 };
 
-export default property;
+export default Property;

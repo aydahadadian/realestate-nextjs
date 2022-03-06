@@ -1,21 +1,24 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-// import Image from 'next/image'
-import { Image } from '@chakra-ui/react'
+import Image from 'next/image';
+
 import { Flex, Box, Text, Icon } from '@chakra-ui/react';
 import { BsFilter } from 'react-icons/bs';
-
+import Navbar from '../components/Navbar';
 import Property from '../components/Property';
 import SearchFilters from '../components/SearchFilters';
 import { baseUrl, fetchApi } from '../utils/fetchApi';
-import noresult from '../assets/noresult.svg'
+import noresult from '../assets/Images/noresult.svg'
 
 
-const search = ({properties}) => {
+const Search = ({properties}) => {
+  
     const [searchFilters, setSearchFilters] = useState(false);
     const router = useRouter();
   return (
-  <Box>
+    <>
+    <Navbar position="relative"/>
+    <Box>
       <Flex
         onClick={() => setSearchFilters(!searchFilters)}
         cursor='pointer'
@@ -35,7 +38,7 @@ const search = ({properties}) => {
       <Text fontSize='2xl' p='4' fontWeight='bold'>
         Properties {router.query.purpose}
       </Text>
-      <Flex flexWrap='wrap'>
+      <Flex flexWrap='wrap' justifyContent="center">
         {properties.map((property) => <Property property={property} key={property.id} />)}
       </Flex>
       {properties.length === 0 && (
@@ -45,11 +48,13 @@ const search = ({properties}) => {
         </Flex>
       )}
 
-  </Box>)
+  </Box>
+  </>
+  )
 };
 
+export default Search;
 
-export default search;
 
 export async function getServerSideProps({ query }) {
     const purpose = query.purpose || 'for-rent';
@@ -71,5 +76,3 @@ export async function getServerSideProps({ query }) {
       },
     };
   }
-
-
